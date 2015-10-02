@@ -25,7 +25,7 @@ class Melon(object):
 
         robots.cleanerbot.clean(self)
         robots.stickerbot.apply_logo(self)
-    
+
     def __str__(self):
         """Print out information about melon."""
 
@@ -33,11 +33,20 @@ class Melon(object):
             return self.melon_type
         else:
             return "{} {:.2f} lbs {}".format(self.color,
-                                        self.weight,
-                                        self.melon_type)
+                                             self.weight,
+                                             self.melon_type)
 
 
-# FIXME: Add Squash Class definition here.
+class Squash (Melon):
+    """Squash subclass of Melon class"""
+
+    def __init__(self):
+        super(Squash, self).__init__(self, "Winter Squash")
+
+    def prep(self):
+        robots.cleanerbot.clean(self)
+        robots.painterbot.paint(self)
+        robots.stickerbot.apply_logo(self)
 
 
 def show_help():
@@ -66,7 +75,7 @@ def main():
 
     Distinguishes between melons/squashes."""
 
-    # Check to make sure we've been passed an argument on the 
+    # Check to make sure we've been passed an argument on the
     # command line.  If not, display instructions.
 
     if len(sys.argv) < 2:
@@ -87,7 +96,7 @@ def main():
         # <melon name>: <quantity>
         melon_type, quantity = line.rstrip().split(':')
         quantity = int(quantity)
-        
+
         print "\n-----"
         print "Fullfilling order of {} {}".format(quantity, melon_type)
         print "-----\n"
