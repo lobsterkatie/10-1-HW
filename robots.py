@@ -109,7 +109,7 @@ class InspectorBot(Robot):
                 "All melons must be Green!  REJECTED!!")
             return False
         
-        self.display_status(OK + "%s Passes" % melon)
+        self.display_status(OK + "%s Passes\n" % melon)
 
         return True
     
@@ -161,7 +161,7 @@ class TrashBot(Robot):
     def trash(self, melon):
         """Take melon to the trash."""
 
-        self.display_status("Sending %s to the compost" % melon)
+        self.display_status("Sending %s to the compost\n" % melon)
 
 
 class PainterBot(Robot):

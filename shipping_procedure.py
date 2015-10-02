@@ -40,8 +40,8 @@ class Melon(object):
 class Squash (Melon):
     """Squash subclass of Melon class"""
 
-    def __init__(self):
-        super(Squash, self).__init__(self, "Winter Squash")
+    def __init__(self, type):
+        super(Squash, self).__init__(type)
 
     def prep(self):
         robots.cleanerbot.clean(self)
@@ -98,7 +98,10 @@ def main():
         quantity = int(quantity)
 
         print "\n-----"
-        print "Fullfilling order of {} {}".format(quantity, melon_type)
+        if melon_type.endswith(("sh", "ss", "j", "x", "z")):
+            print "Fullfilling order of {} {}es".format(quantity, melon_type)
+        else:
+            print "Fullfilling order of {} {}s".format(quantity, melon_type)
         print "-----\n"
 
         count = 0
@@ -117,9 +120,9 @@ def main():
                 print "ORDERS FAILED TO BE FULFILLED!"
                 print "------------------------------\n"
                 sys.exit()
-            
+
             # Have the robot pick a 'melon' -- check to
-            # see if it is a Winter Squash or not. 
+            # see if it is a Winter Squash or not.
 
             if melon_type != "Winter Squash":
                 m = Melon(melon_type)
@@ -132,7 +135,7 @@ def main():
 
             # Prepare the melon
             m.prep()
-            
+
             # Evaluate the melon
 
             presentable = robots.inspectorbot.evaluate(m)
@@ -145,7 +148,7 @@ def main():
                 continue
 
         print "------"
-        print "Robots Picked {} {} for order of {}".format(count, melon_type, quantity)
+        print "Robots Picked {} {} for order of {}\n".format(count, melon_type, quantity)
 
         # Pack the melons for shipping
         boxes = robots.packerbot.pack(melons)
